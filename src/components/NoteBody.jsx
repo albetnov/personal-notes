@@ -1,11 +1,11 @@
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import NoteCreator from "./NoteCreator";
-import NoteItem from "./NoteItem";
 import NotesList from "./NotesList";
 
 export default function NoteBody({ data, onCreate, onDelete, onMoved }) {
   return (
-    <section className="note-app__body">
+    <Box mb={5}>
       <NoteCreator onCreate={onCreate} />
       <NotesList
         title={"Catatan Aktif"}
@@ -19,6 +19,6 @@ export default function NoteBody({ data, onCreate, onDelete, onMoved }) {
         onDelete={onDelete}
         onMoved={onMoved}
       />
-    </section>
+    </Box>
   );
 }

@@ -39,7 +39,6 @@ export default function NoteApp() {
   };
 
   const onDataMovedEventHandler = (id) => {
-    const key = data.findIndex((item) => item.id === id);
     setData((prevState) => [
       ...prevState.map((item) => {
         if (item.id === id) {
