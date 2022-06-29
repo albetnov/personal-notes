@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="note-app__header">
+      <h1>Notes</h1>
+      <input type="search" placeholder="Cari catatan..." />
+    </header>
+    <section class="note-app__body">
+      <div class="note-input">
+        <h2>Buat Catatan</h2>
+        <p class="note-input__title__char-limit">Sisa Karakter:</p>
+        <input
+          type="text"
+          placeholder="Ini adalah judul..."
+          class="note-input__title"
+        />
+        <textarea
+          cols="30"
+          rows="10"
+          placeholder="Tuliskan Catatan mu disini"
+          class="note-input__body"
+        ></textarea>
+        <button type="submit">Buat</button>
+      </div>
+      <h2>Catatan Aktif</h2>
+      <p class="notes-list__empty-message">Tidak ada catatan...</p>
+      <div class="notes-list">
+        <div class="note-item">
+          <div class="note-item__content">
+            <p class="note-item__title">Title</p>
+            <p class="note-item__date">29 Jan 2022</p>
+            <p class="note-item__body">This is a content</p>
+          </div>
+          <div class="note-item__action">
+            <button class="note-item__delete-button">Hapus</button>
+            <button class="note-item__archive-button">Arsip</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
