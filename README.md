@@ -11,3 +11,9 @@ Merupakan sebuah website sederhana yang dibuat dengan harapan agar tuntas di Sub
 ## Serving Up
 
 - Ketik `npm start` atau `pnpm start`
+
+## Libraries
+
+- Chakra UI
+
+Untuk membangun User Interface.
