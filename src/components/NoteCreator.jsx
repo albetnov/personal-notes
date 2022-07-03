@@ -2,6 +2,8 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Text } from "@chakra-ui/react";
 import { FormHelperText } from "@chakra-ui/react";
 import { Textarea } from "@chakra-ui/react";
+import { Alert } from "@chakra-ui/react";
+import { AlertIcon } from "@chakra-ui/react";
 import { Flex } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
@@ -13,6 +15,7 @@ export default function NoteCreator({ onCreate }) {
   const [titleLength, setTitleLength] = useState(50);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [error, setError] = useState("");
 
   const onTitleChanged = (event) => {
     setTitleLength((prevState) => 50 - event.target.value.length);
@@ -21,8 +24,26 @@ export default function NoteCreator({ onCreate }) {
 
   const onBodyChanged = (event) => setBody(event.target.value);
 
+  const ErrorHandler = () => {
+    if (error) {
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+      return (
+        <Alert status="error" rounded="lg">
+          <AlertIcon />
+          {error}
+        </Alert>
+      );
+    }
+    return;
+  };
+
   const onSubmitForm = (event) => {
     event.preventDefault();
+    if (title.trim() === "" || body.trim() === "") {
+      return setError("Title and body are required");
+    }
     onCreate({ title, body });
     setTitle("");
     setBody("");
@@ -32,6 +53,7 @@ export default function NoteCreator({ onCreate }) {
   return (
     <Box rounded="lg" boxShadow="lg" p={5} mt={5} maxWidth={700} mx="auto">
       <Text fontSize="xl">Buat Catatan</Text>
+      <ErrorHandler />
       <form onSubmit={onSubmitForm}>
         <Flex alignItems="center" flexDirection="column">
           <FormControl mt={2}>
