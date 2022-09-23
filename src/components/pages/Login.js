@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
 import { FiArrowRight } from 'react-icons/fi'
@@ -11,11 +11,13 @@ import Alert from '../UI/Alert'
 import AuthContext from '../../store/AuthContext'
 import LangContext from '../../store/LangContext'
 import langString from '../../utilities/langString'
+import LoadingButton from '../UI/LoadingButton'
 
 export default function Login () {
   const [alert, setAlert, showAlert, closeAlert] = useAlert()
   const ctx = useContext(AuthContext)
   const { lang } = useContext(LangContext)
+  const [loading, setLoading] = useState(false)
 
   const {
     register: emailRegister,
@@ -41,7 +43,9 @@ export default function Login () {
       return
     }
 
+    setLoading(true)
     const { error, data } = await login({ email, password })
+    setLoading(false)
 
     if (error) {
       if (data === 'Password is wrong' || data === 'Email not found') {
@@ -52,7 +56,7 @@ export default function Login () {
       return
     }
 
-    const attempt = await ctx.login(data.accessToken)
+    const attempt = ctx.login(data.accessToken)
 
     if (!attempt) {
       setAlert(langString[lang].error.serverErr)
@@ -62,6 +66,13 @@ export default function Login () {
     resetEmail()
     resetPassword()
   }
+
+  const submitButton = (
+    <Button className="mt-5 w-full group dark:bg-zinc-600" type="submit">
+      {langString[lang].auth.login.action}
+      <FiArrowRight className="inline ml-1 transition-transform delay-100 group-hover:translate-x-2" />
+    </Button>
+  )
 
   return (
     <BaseAuth
@@ -86,10 +97,7 @@ export default function Login () {
           id="password"
           {...passwordRegister(langString[lang].auth.login.password.error)}
         />
-        <Button className="mt-5 w-full group dark:bg-zinc-600" type="submit">
-          {langString[lang].auth.login.action}
-          <FiArrowRight className="inline ml-1 transition-transform delay-100 group-hover:translate-x-2" />
-        </Button>
+        {loading ? <LoadingButton className="mt-5 w-full dark:bg-zinc-600" /> : submitButton}
       </form>
     </BaseAuth>
   )

@@ -105,42 +105,54 @@ export default function Notes ({ notes, refetch }) {
   }
 
   return (
-    <Card className="mt-10 flex flex-wrap gap-6 lg:max-w-5xl mx-auto items-start justify-center">
+    <Card className="mt-10 lg:max-w-5xl mx-auto">
       <Alert ensurance={showError} message={error} closeHandler={closeError} />
-      {Object.keys(notes).length > 0
-        ? (
-            notes.map((item) => {
-              return (
-            <Card
-              className="w-full md:w-1/3 lg:w-1/2 md:max-w-md border-t-4 border-t-zinc-700 transition-all delay-100 hover:cursor-pointer hover:shadow-lg dark:border-t-slate-200"
-              key={item.id}
-              onClick={() => openDetails(item.id)}
-            >
-              <Typography className="font-semibold text-center dark:text-slate-200">
-                {item.title}
-              </Typography>
-              <hr className="mx-auto w-3/4 my-2" />
-              <div className="dark:text-slate-200">
-                {parser(
-                  item.body.length > 200 ? item.body.substring(0, 200).concat('...') : item.body
-                )}
-              </div>
-              <div className="flex gap-3 mt-3 mb-1">
-                {item.archived ? <UnArchiveButton id={item.id} /> : <ArchiveButton id={item.id} />}
-                <button
-                  className="p-2 rounded bg-rose-200 transition-all delay-100 hover:shadow"
-                  onClick={(event) => deleteNoteHandler(event, item.id)}
-                >
-                  <FiTrash className="text-rose-600" />
-                </button>
-              </div>
-            </Card>
-              )
-            })
-          )
-        : (
-        <Alert ensurance={showAlert} message={langString[lang].noData} closeHandler={toggleAlert} />
-          )}
+      <div className="flex flex-wrap gap-6 items-start justify-center">
+        {Object.keys(notes).length > 0
+          ? (
+              notes.map((item) => {
+                return (
+              <Card
+                className="w-full md:w-1/3 lg:w-1/2 md:max-w-md border-t-4 border-t-zinc-700 transition-all delay-100 hover:cursor-pointer hover:shadow-lg dark:border-t-slate-200"
+                key={item.id}
+                onClick={() => openDetails(item.id)}
+              >
+                <Typography className="font-semibold text-center dark:text-slate-200">
+                  {item.title}
+                </Typography>
+                <hr className="mx-auto w-3/4 my-2" />
+                <div className="dark:text-slate-200">
+                  {parser(
+                    item.body.length > 200 ? item.body.substring(0, 200).concat('...') : item.body
+                  )}
+                </div>
+                <div className="flex gap-3 mt-3 mb-1">
+                  {item.archived
+                    ? (
+                    <UnArchiveButton id={item.id} />
+                      )
+                    : (
+                    <ArchiveButton id={item.id} />
+                      )}
+                  <button
+                    className="p-2 rounded bg-rose-200 transition-all delay-100 hover:shadow"
+                    onClick={(event) => deleteNoteHandler(event, item.id)}
+                  >
+                    <FiTrash className="text-rose-600" />
+                  </button>
+                </div>
+              </Card>
+                )
+              })
+            )
+          : (
+          <Alert
+            ensurance={showAlert}
+            message={langString[lang].noData}
+            closeHandler={toggleAlert}
+          />
+            )}
+      </div>
     </Card>
   )
 }

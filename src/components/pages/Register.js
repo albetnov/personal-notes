@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FiUserPlus } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import useAlert from '../../hooks/useAlert'
@@ -10,11 +10,13 @@ import BaseAuth from '../auth/BaseAuth'
 import Alert from '../UI/Alert'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
+import LoadingButton from '../UI/LoadingButton'
 
 export default function Register () {
   const { lang } = useContext(LangContext)
   const [alert, setAlert, showAlert, closeAlert] = useAlert()
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   const {
     register: emailRegister,
@@ -59,7 +61,9 @@ export default function Register () {
       return
     }
 
+    setLoading(true)
     const { error } = await register({ name, email, password })
+    setLoading(false)
 
     if (error) {
       setAlert(langString[lang].error.serverErr)
@@ -73,6 +77,13 @@ export default function Register () {
 
     navigate('/')
   }
+
+  const submitButton = (
+    <Button className="mt-5 w-full group dark:bg-zinc-600" type="submit">
+      {langString[lang].auth.register.action}
+      <FiUserPlus className="inline ml-1 transition-transform delay-100 group-hover:scale-110" />
+    </Button>
+  )
 
   return (
     <BaseAuth
@@ -111,10 +122,7 @@ export default function Register () {
           placeholder={langString[lang].auth.register.confirmPassword.placeholder}
           {...passwordConfirmRegister(langString[lang].auth.register.confirmPassword.error)}
         />
-        <Button className="mt-5 w-full group dark:bg-zinc-600" type="submit">
-          {langString[lang].auth.register.action}
-          <FiUserPlus className="inline ml-1 transition-transform delay-100 group-hover:scale-110" />
-        </Button>
+        {loading ? <LoadingButton className="mt-5 w-full dark:bg-zinc-600" /> : submitButton}
       </form>
     </BaseAuth>
   )

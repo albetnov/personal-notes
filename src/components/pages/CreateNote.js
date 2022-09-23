@@ -7,7 +7,7 @@ import Typography from '../UI/Typography'
 import useForm from '../../hooks/useForm'
 import React, { useContext, useEffect, useState } from 'react'
 import Button from '../UI/Button'
-import { FiLoader, FiSend } from 'react-icons/fi'
+import { FiSend } from 'react-icons/fi'
 import { addNote } from '../../utilities/api'
 import useAlert from '../../hooks/useAlert'
 import LangContext from '../../store/LangContext'
@@ -15,6 +15,7 @@ import langString from '../../utilities/langString'
 import Alert from '../UI/Alert'
 
 import './ckeditor.css'
+import LoadingButton from '../UI/LoadingButton'
 
 export default function CreateNote () {
   const { lang } = useContext(LangContext)
@@ -79,12 +80,7 @@ export default function CreateNote () {
     resetContent()
   }
 
-  const loadingButton = (
-    <Button disabled className="dark:bg-zinc-700">
-      <FiLoader className="inline mr-2 ml-1 animate-spin" />
-      {langString[lang].loading}
-    </Button>
-  )
+  const loadingButton = <LoadingButton className="dark:bg-zinc-700" />
 
   const createButton = (
     <Button type="submit" className="mt-3 dark:bg-zinc-700 group">

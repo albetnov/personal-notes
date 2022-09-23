@@ -165,17 +165,21 @@ async function archiveNote (id) {
 }
 
 async function unarchiveNote (id) {
-  const response = await fetchWithToken(`${BASE_URL}/notes/${id}/unarchive`, {
-    method: 'POST'
-  })
+  try {
+    const response = await fetchWithToken(`${BASE_URL}/notes/${id}/unarchive`, {
+      method: 'POST'
+    })
 
-  const responseJson = await response.json()
+    const responseJson = await response.json()
 
-  if (responseJson.status !== 'success') {
+    if (responseJson.status !== 'success') {
+      throw new Error()
+    }
+
+    return { error: false, data: responseJson.data }
+  } catch (err) {
     return { error: true, data: null }
   }
-
-  return { error: false, data: responseJson.data }
 }
 
 async function deleteNote (id) {
