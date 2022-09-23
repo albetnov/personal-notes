@@ -20,19 +20,25 @@ const modeReducer = (state, action) => {
       localStorage.setItem('themeMode', newMode)
       return newMode
     }
+    case 'ON_REPLACE': {
+      const newMode = action.mode === 'light' ? 'dark' : 'light'
+      localStorage.setItem('themeMode', newMode)
+      return newMode
+    }
     default:
       return getInitial()
   }
 }
 
 export default function ThemeProvider ({ children }) {
-  const [mode, dispatchMode] = useReducer(modeReducer, getInitial())
+  const [mode, dispatchMode] = useReducer(modeReducer, 'light')
 
   const toggleMode = () => {
     dispatchMode({ type: 'ON_TOGGLE' })
   }
 
   useEffect(() => {
+    dispatchMode({ action: 'ON_REPLACE', mode: getInitial() })
     if (mode === 'dark') {
       document.body.classList.add('dark:bg-zinc-700')
       document.documentElement.classList.add('dark')
