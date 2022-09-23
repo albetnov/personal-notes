@@ -3,6 +3,7 @@ import NoteRoutes from './components/NoteRoutes'
 import Sidebar from './components/sidebar/Sidebar'
 import AuthProvider from './store/AuthProvider'
 import LangProvider from './store/LangProvider'
+import SidebarProvider from './store/SidebarProvider'
 import ThemeProvider from './store/ThemeProvider'
 
 function App () {
@@ -10,10 +11,12 @@ function App () {
     <AuthProvider>
       <LangProvider>
         <ThemeProvider>
-          <Sidebar />
-          <main>
-            <NoteRoutes />
-          </main>
+          <SidebarProvider>
+            <Sidebar />
+            <main>
+              <NoteRoutes />
+            </main>
+          </SidebarProvider>
         </ThemeProvider>
       </LangProvider>
     </AuthProvider>

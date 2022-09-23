@@ -16,10 +16,7 @@ export default function List ({ children, to }) {
 
   return (
     <li className={classes}>
-      <Link
-        to={to}
-        className="underline__smooth"
-      >
+      <Link to={to} className={!isActive ? 'underline__smooth dark:underline__smooth__dark' : ''}>
         {children}
       </Link>
     </li>

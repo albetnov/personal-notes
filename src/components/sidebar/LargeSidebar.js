@@ -46,7 +46,7 @@ export default function LargeSidebar ({ userName, logout }) {
         </Typography>
         <div className="relative flex gap-3 justify-center">
           {popOver && (
-            <div className="absolute flex flex-col rounded-full p-2 shadow-lg left-7 -top-24 animate__fade bg-white gap-6 items-center dark:bg-zinc-600">
+            <div className="absolute flex flex-col rounded-2xl p-2 shadow-lg left-7 -top-24 animate__fade bg-white gap-6 items-center dark:bg-zinc-600">
               <SwitchLang className="w-7" />
               <ToggleTheme />
             </div>

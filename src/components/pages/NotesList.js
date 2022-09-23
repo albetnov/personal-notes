@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FiChevronsDown } from 'react-icons/fi'
 import { useSearchParams } from 'react-router-dom'
 import useAlert from '../../hooks/useAlert'
@@ -38,7 +38,7 @@ export default function NotesList () {
     setSearchParams({ title: value })
   }
 
-  const getCount = useCallback(async () => {
+  const getCount = async () => {
     try {
       setLoading(true)
 
@@ -61,11 +61,12 @@ export default function NotesList () {
     } finally {
       setLoading(false)
     }
-  }, [lang, setAlert])
+  }
 
   useEffect(() => {
     getCount()
-  }, [getCount])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(keyword.toLowerCase())

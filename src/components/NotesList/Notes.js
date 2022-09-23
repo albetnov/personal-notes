@@ -62,7 +62,7 @@ export default function Notes ({ notes, refetch }) {
   const BaseButton = ({ icon, onClick }) => {
     return (
       <button
-        className="p-2 rounded bg-sky-200 transition-all delay-100 hover:shadow"
+        className="p-2 rounded bg-sky-200 transition-all delay-100 hover:shadow-lg dark:hover:bg-sky-100"
         onClick={onClick}
       >
         {icon}
@@ -77,7 +77,7 @@ export default function Notes ({ notes, refetch }) {
 
   const ArchiveButton = ({ id }) => (
     <BaseButton
-      icon={<FiArchive className="text-sky-600" />}
+      icon={<FiArchive className="text-sky-600 dark:hover:text-sky-500" />}
       onClick={(event) => {
         event.stopPropagation()
         archiveNoteHandler(id)
@@ -91,7 +91,7 @@ export default function Notes ({ notes, refetch }) {
 
   const UnArchiveButton = ({ id }) => (
     <BaseButton
-      icon={<AiOutlineUndo className="text-sky-600" />}
+      icon={<AiOutlineUndo className="text-sky-600 dark:hover:text-sky-500" />}
       onClick={(event) => {
         event.stopPropagation()
         unArchiveNoteHandler(id)
@@ -135,10 +135,10 @@ export default function Notes ({ notes, refetch }) {
                     <ArchiveButton id={item.id} />
                       )}
                   <button
-                    className="p-2 rounded bg-rose-200 transition-all delay-100 hover:shadow"
+                    className="p-2 rounded bg-rose-200 transition-all delay-100 hover:shadow-lg dark:hover:bg-rose-100"
                     onClick={(event) => deleteNoteHandler(event, item.id)}
                   >
-                    <FiTrash className="text-rose-600" />
+                    <FiTrash className="text-rose-600 dark:hover:text-rose-500" />
                   </button>
                 </div>
               </Card>

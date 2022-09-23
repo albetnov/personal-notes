@@ -2,10 +2,12 @@
 module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  mode: 'jit',
   theme: {
     extend: {
       fontFamily: {
-        sofia: 'Sofia'
+        sofia: 'Sofia',
+        nunitosans: 'Nunito Sans'
       }
     }
   },
