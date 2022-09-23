@@ -55,8 +55,8 @@ export default function SmallSidebar ({ userName, logout }) {
         <Typography className={`text-white ${!expand && 'hidden'}`}>{userName}</Typography>
       </div>
       <button
-        className={`bg-white shadow rounded-full p-3 absolute left-14 font-bold top-1/2 transition-all delay-100 ${
-          expand ? 'rotate-180 left-40' : ''
+        className={`bg-white shadow-lg dark:shadow rounded-full p-3 absolute font-bold top-1/2 transition-all delay-100 ${
+          expand ? 'rotate-180 left-40' : 'left-12'
         }`}
         onClick={toggleExpand}
       >
