@@ -1,13 +1,23 @@
-import React from "react";
-import NoteApp from "./components/NoteApp";
-import { ChakraProvider } from "@chakra-ui/react";
+import React from 'react'
+import NoteRoutes from './components/NoteRoutes'
+import Sidebar from './components/sidebar/Sidebar'
+import AuthProvider from './store/AuthProvider'
+import LangProvider from './store/LangProvider'
+import ThemeProvider from './store/ThemeProvider'
 
-// import style
-
-export default function App() {
+function App () {
   return (
-    <ChakraProvider>
-      <NoteApp />
-    </ChakraProvider>
-  );
+    <AuthProvider>
+      <LangProvider>
+        <ThemeProvider>
+          <Sidebar />
+          <main>
+            <NoteRoutes />
+          </main>
+        </ThemeProvider>
+      </LangProvider>
+    </AuthProvider>
+  )
 }
+
+export default App
