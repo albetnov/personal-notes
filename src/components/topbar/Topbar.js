@@ -1,4 +1,4 @@
-import React, { memo, useContext, useState } from 'react'
+import React, { memo, useContext } from 'react'
 import { FiLogOut, FiMenu } from 'react-icons/fi'
 import AuthContext from '../../store/AuthContext'
 import BorderIconButton from '../UI/BorderIconButton'
@@ -6,14 +6,11 @@ import Search from './UI/Search'
 import SwitchLang from './UI/SwitchLang'
 import ToggleTheme from './UI/ToggleTheme'
 import PropTypes from 'prop-types'
+import usePopOver from '../../hooks/usePopOver'
 
 const Topbar = ({ onSearch, search }) => {
-  const [showPop, setShowPop] = useState(false)
+  const [showPop, togglePopOver] = usePopOver()
   const { logout } = useContext(AuthContext)
-
-  const togglePopOver = () => {
-    setShowPop((prevValue) => !prevValue)
-  }
 
   const searchChangeHandler = (event) => {
     onSearch(event.target.value)
@@ -33,9 +30,11 @@ const Topbar = ({ onSearch, search }) => {
           </BorderIconButton>
         </div>
         {showPop && (
-          <div className="md:hidden absolute z-10 animate__fade top-10 bg-white rounded-lg dark:bg-zinc-500 shadow p-5 gap-5 flex justify-center items-center flex-col">
+          <div onClick={(event) => event.stopPropagation()} className="md:hidden absolute z-10 animate__fade top-10 bg-white rounded-lg dark:bg-zinc-500 shadow p-5 gap-5 flex justify-center items-center flex-col">
             <SwitchLang className="scale-150" />
+            <hr className='w-full border-t-2 border-zinc-600 dark:border-slate-200' />
             <ToggleTheme />
+            <hr className='w-full border-t-2 border-zinc-600 dark:border-slate-200' />
             <button onClick={logout}>
               <FiLogOut className="dark:text-slate-200" />
             </button>

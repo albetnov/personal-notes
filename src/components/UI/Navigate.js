@@ -16,7 +16,7 @@ export default function Navigate ({ to, children, outer = false, className }) {
   }
 
   return (
-    <Link to={to} className={classes}>
+    <Link to={to} onClick={(event) => event.stopPropagation()} className={classes}>
       {children}
     </Link>
   )

@@ -100,16 +100,18 @@ export default function SmallSidebar ({ userName, logout }) {
           <>
             <hr className="mt-2 mb-1 border-slate-900" />
             <div className="flex justify-center items-center flex-col gap-3">
-              <SwitchLang className="w-10" />
-              <hr className="w-full border-zinc-700" />
-              <ToggleTheme />
-              <hr className="w-full border-zinc-700" />
-              <button onClick={logout}>
+              <div className="mt-5 w-full h-10 flex items-center justify-center rounded-3xl py-1 px-3 bg-neutral-100 shadow-lg dark:bg-zinc-400">
+                <SwitchLang className="w-10" />
+              </div>
+              <div className="w-full h-10 flex items-center justify-center rounded-3xl py-1 px-3 bg-neutral-100 shadow-lg dark:bg-zinc-400">
+                <ToggleTheme />
+              </div>
+              <button onClick={logout} className="w-full h-10 flex items-center justify-center rounded-3xl py-1 px-3 bg-slate-50 shadow-lg dark:bg-zinc-400">
                 <FiLogOut className="rotate-180" />
               </button>
               <button
                 onClick={toggleDropDown}
-                className="self-end p-2 rounded-full bg-zinc-700 text-white"
+                className="mt-3 self-end p-2 rounded-full bg-zinc-700 text-white"
               >
                 <FiChevronUp />
               </button>

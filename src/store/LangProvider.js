@@ -19,7 +19,8 @@ const langReducer = (state, action) => {
 export default function LangProvider ({ children }) {
   const [lang, dispatchLang] = useReducer(langReducer, defaultLang)
 
-  const toggleLang = () => {
+  const toggleLang = (event) => {
+    event.stopPropagation()
     dispatchLang({ type: 'ON_TOGGLE' })
   }
 
