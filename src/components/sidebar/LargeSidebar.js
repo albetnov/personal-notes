@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FiSettings, FiLogOut } from 'react-icons/fi'
 import List from './UI/List'
 import BorderIconButton from '../UI/BorderIconButton'
@@ -10,14 +10,30 @@ import { MdNotes } from 'react-icons/md'
 import langString from '../../utilities/langString'
 import LangContext from '../../store/LangContext'
 import PropTypes from 'prop-types'
-
 export default function LargeSidebar ({ userName, logout }) {
   const { lang } = useContext(LangContext)
   const [popOver, setPopOver] = useState(false)
 
-  const togglePopOver = () => {
-    setPopOver((prevValue) => !prevValue)
+  const closePopOver = () => {
+    setPopOver(false)
   }
+
+  const togglePopOver = () => {
+    setPopOver((prevValue) => {
+      if (prevValue) {
+        window.removeEventListener('click', closePopOver)
+        window.addEventListener('click', closePopOver)
+        return false
+      }
+      // window.removeEventListener('click', closePopOver)
+      // }
+      return true
+    })
+  }
+
+  useEffect(() => {
+    console.log(popOver)
+  }, [popOver])
 
   return (
     <div className="h-full hidden sm:flex flex-col justify-between pb-10">
