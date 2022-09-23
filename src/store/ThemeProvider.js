@@ -33,7 +33,8 @@ const modeReducer = (state, action) => {
 export default function ThemeProvider ({ children }) {
   const [mode, dispatchMode] = useReducer(modeReducer, 'light')
 
-  const toggleMode = () => {
+  const toggleMode = (event) => {
+    event.stopPropagation()
     dispatchMode({ type: 'ON_TOGGLE' })
   }
 
